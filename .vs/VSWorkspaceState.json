@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src"
   ],
-  "SelectedNode": "\\C:\\Users\\asus\\Source\\Repos\\linked-in-clone",
+  "SelectedNode": "\\src\\App.js",
   "PreviewInSolutionExplorer": false
 }

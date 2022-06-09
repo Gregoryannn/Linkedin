@@ -1,8 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\public",
+    "\\src",
+    "\\src\\components\\login",
+    "\\src\\store",
+    "\\src\\store\\reducers"
   ],
-  "SelectedNode": "\\src\\App.js",
+  "SelectedNode": "\\.gitignore",
   "PreviewInSolutionExplorer": false
 }

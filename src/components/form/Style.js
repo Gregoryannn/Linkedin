@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { darkPrimary, darkSecondary, LinkedInBlue, LinkedInLightBlue } from "../../assets/Colors";
+import { darkSecondary, LinkedInBlue, LinkedInLightBlue } from "../../assets/Colors";
 
 export default makeStyles((theme) => ({
     upload: {
@@ -29,7 +29,7 @@ export default makeStyles((theme) => ({
         borderRadius: 999,
         border: "1px solid",
         borderColor: theme.palette.type === "dark" ? "rgba(225,225,225,0.1)" : "rgba(0,0,0,0.15)",
-            overflow: "hidden",
+        overflow: "hidden",
         "& > .MuiSvgIcon-root": {
             marginLeft: 10,
         },
@@ -54,13 +54,13 @@ export default makeStyles((theme) => ({
             padding: "0 15px",
             border: 0,
             outlineWidth: 0,
-            backgroundColor: LinkedInBlue,
+            backgroundColor: theme.palette.type === "dark" ? LinkedInLightBlue : LinkedInBlue,
             color: "white",
             cursor: "pointer",
             fontWeight: 600,
             transition: "all 0.4s ease",
             "&:hover": {
-                backgroundColor: "#008edb",
+                backgroundColor: theme.palette.type === "dark" ? LinkedInBlue : LinkedInLightBlue,
             },
         },
     },

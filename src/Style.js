@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
     app: {},
-
     app__header: {
         position: "sticky",
         top: 0,
@@ -16,7 +15,6 @@ export default makeStyles((theme) => ({
         minHeight: "93vh",
         display: "flex",
         justifyContent: "center",
-        
     },
 
     body__sidebar: {
@@ -27,24 +25,26 @@ export default makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-       
-            padding: 30,
-            [theme.breakpoints.down("xs")]: {
-                padding: 0,
-            },
+        padding: 30,
+        [theme.breakpoints.down("xs")]: {
+            padding: 0,
         },
+    },
 
-        feed__form: {
-            width: "100%",
-            height: "auto",
+    feed__form: {
+        width: "100%",
+        height: "auto",
+        [theme.breakpoints.down("xs")]: {
+            paddingTop: 10,
         },
+    },
 
-        feed__posts: {
-            width: "100%",
-            height: "auto",
-        },
+    feed__posts: {
+        width: "100%",
+        height: "auto",
+    },
 
-        body__widgets: {
-            paddingTop: 30,
-        },
-    }));
+    body__widgets: {
+        paddingTop: 30,
+    },
+}));

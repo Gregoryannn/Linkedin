@@ -1,13 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles((theme) => ({
+
     menuItem: {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         padding: "0 5px",
-        color: "#6e6e6e",
+        color: theme.palette.type === "dark" ? "grey" : "#6e6e6e",
         cursor: "pointer",
-        transition: "all 0.4s ease",
+        transition: "all 0.5s ease",
         "& > .MuiSvgIcon-root": {
             [theme.breakpoints.down("sm")]: {
                 fontSize: 24,

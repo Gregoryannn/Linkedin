@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { LinkedInBlue, LinkedInLightBlue, darkSecondary } from "../../../assets/Colors";
-
 export default makeStyles((theme) => ({
     sidebarBottom: {
         display: "flex",
@@ -18,13 +17,18 @@ export default makeStyles((theme) => ({
         cursor: "pointer",
         "& > .MuiSvgIcon-root": {
             transition: "all 0.4s ease",
+            color: "grey",
             "&:hover": {
                 borderRadius: 999,
-                backgroundColor: "lightgrey",
+                backgroundColor: theme.palette.type === "dark" ? darkSecondary : "lightgrey",
             },
         },
         "& > h4": {
             color: theme.palette.type === "dark" ? LinkedInLightBlue : LinkedInBlue,
+            transition: "all 0.4s ease",
+            "&:hover": {
+                textDecoration: "underline",
+            },
         },
     },
     discover__more: {

@@ -14,12 +14,10 @@ import { v4 as uuid } from "uuid";
 import db, { storage } from "../../firebase";
 import { LinkedInBlue, LinkedInLightBlue } from "../../assets/Colors";
 import Styles from "./Style";
-
 const Form = () => {
     const classes = Styles();
     const theme = useTheme();
     const { displayName, photoURL } = useSelector((state) => state.user);
-
     const [uploadData, setUploadData] = useState({
         description: "",
         file: {
@@ -200,9 +198,7 @@ const Form = () => {
             ) : (
                 ""
             )
-        }
-
-        <
+        } <
         div className = { classes.upload__media } >
         <
         label htmlFor = "upload-image"
@@ -232,7 +228,7 @@ const Form = () => {
         CalendarViewDayIcon style = {
             { color: "#f5987e" } }
         /> <
-        h4 > Article < /h4> <
+        h4 > Write article < /h4> <
         /div> <
         /div> <
         /Paper>

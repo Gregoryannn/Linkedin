@@ -3,10 +3,11 @@
     "",
     "\\public",
     "\\src",
-    "\\src\\components\\login",
+    "\\src\\components\\header\\menuItem",
     "\\src\\store",
+    "\\src\\store\\actions",
     "\\src\\store\\reducers"
   ],
-  "SelectedNode": "\\.gitignore",
+  "SelectedNode": "\\src\\style.css",
   "PreviewInSolutionExplorer": false
 }

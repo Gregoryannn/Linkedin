@@ -7,9 +7,11 @@ import Header from "./components/header/Header";
 import Form from "./components/form/Form";
 import Posts from "./components/posts/Posts";
 import Sidebar from "./components/sidebar/Sidebar";
+import Widgets from "./components/widgets/Widgets";
 import { LoginAction, LogoutAction } from "./store/actions/auth";
 import { auth } from "./firebase";
 import Styles from "./Style";
+import { LinkedInBgColor, darkPrimary } from "./assets/Colors";
 
 const App = () => {
     const classes = Styles();
@@ -21,14 +23,11 @@ const App = () => {
             type: mode ? "dark" : "light",
         },
     });
-
     useEffect(() => {
         auth.onAuthStateChanged((authUser) => {
             if (authUser) {
-                dispatch(Login(authUser));
                 dispatch(LoginAction(authUser));
             } else {
-                dispatch(Logout());
                 dispatch(LogoutAction());
             }
         });
@@ -37,38 +36,43 @@ const App = () => {
     return (
         <ThemeProvider theme={muiTheme}>
             {!displayName ? (
-        <Login />
+                <Login />
             ) : (
-                <Grid container className={classes.app}>
-                    <Grid item container className={classes.app__header}>
-                        {/* Header */}
-                        <Header />
-                    </Grid>
-                    <Grid item container className={classes.app__body}>
-                        <Hidden smDown>
-                            <Grid item className={classes.body__sidebar} md={2}>
-                                {/* Sidebar */}
-                                <Sidebar />
-                            </Grid>
-                        </Hidden>
-                        <Grid item className={classes.body__feed} xs={12} sm={8} md={5}>
-                            {/* Feed */}
-                            <Grid item className={classes.feed__form}>
-                                <Form />
-                            </Grid>
-                            <Grid item className={classes.feed__posts}>
-                                <Posts />
-                            </Grid>
+                    <Grid
+                        container
+                        className={classes.app}
+                        style={{ backgroundColor: mode ? darkPrimary : LinkedInBgColor }}
+                    >
+                        <Grid item container className={classes.app__header}>
+                            {/* Header */}
+                            <Header />
                         </Grid>
-                        <Hidden smDown>
-                            <Grid item className={classes.body__widgets} md={2}>
-                                {/* Widgets */}
+                        <Grid item container className={classes.app__body}>
+                            <Hidden smDown>
+                                <Grid item className={classes.body__sidebar} md={2}>
+                                    {/* Sidebar */}
+                                    <Sidebar />
+                                </Grid>
+                            </Hidden>
+                            <Grid item className={classes.body__feed} xs={12} sm={8} md={5}>
+                                {/* Feed */}
+                                <Grid item className={classes.feed__form}>
+                                    <Form />
+                                </Grid>
+                                <Grid item className={classes.feed__posts}>
+                                    <Posts />
+                                </Grid>
                             </Grid>
-                        </Hidden>
+                            <Hidden smDown>
+                                    <Grid item className={classes.body__widgets} md={2.5}>
+                                        {/* Widgets */}
+                                        <Widgets />
+                                    </Grid>
+                            </Hidden>
+                        </Grid>
                     </Grid>
-                </Grid>
-            )}
-        </ThemeProvider>
-    );
+      )}
+                </ThemeProvider>
+            );
 };
-export default App;
+            export default App;

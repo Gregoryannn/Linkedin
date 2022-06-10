@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { darkSecondary } from "../../assets/Colors";
 
 export default makeStyles((theme) => ({
     header: {
@@ -14,7 +15,6 @@ export default makeStyles((theme) => ({
         },
         borderRadius: 0,
     },
-
     header__logo: {
         flex: 4,
         height: "100%",
@@ -25,16 +25,18 @@ export default makeStyles((theme) => ({
             height: 32,
         },
     },
-
     search: {
         width: "60%",
+        [theme.breakpoints.down("xs")]: {
+            width: "100%",
+        },
         height: "65%",
         display: "flex",
         alignItems: "center",
         marginLeft: 10,
         padding: "0 10px",
         borderRadius: 3,
-        backgroundColor: "#eef3f8",
+        backgroundColor: theme.palette.type === "dark" ? darkSecondary : "#eef3f8",
         overflow: "hidden",
         "& > input": {
             height: "100%",
@@ -45,19 +47,20 @@ export default makeStyles((theme) => ({
         },
     },
     header__nav: {
+        [theme.breakpoints.down("xs")]: {
+            display: "none",
+        },
         flex: 6,
         height: "100%",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         padding: "0 10px",
+        "& > div": {
+            flex: 1,
+        },
+        "& > div:nth-child(6)": {
+            borderRight: "1px solid lightgrey",
+        },
     },
-               "& > div": {
-                flex: 1,
-            },
-          
-                "& > div:nth-child(6)": {
-                    borderRight: "1px solid lightgrey",
-                },
-            },
-        }));
+}));

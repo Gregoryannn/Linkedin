@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ChangeTheme } from "../../store/actions/util";
 import Logo from "../../assets/images/logo.png";
 import { Paper, Avatar } from "@material-ui/core";
+import { Paper, Avatar, Tooltip } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import HomeIcon from "@material-ui/icons/Home";
 import GroupIcon from "@material-ui/icons/Group";
@@ -16,6 +17,7 @@ import AppsIcon from "@material-ui/icons/Apps";
 import MenuItem from "./menuItem/MenuItem";
 import Style from "./Style";
 import { auth } from "../../firebase";
+
 const Header = () => {
     const classes = Style();
     const dispatch = useDispatch();
@@ -28,7 +30,11 @@ const Header = () => {
         { Icon: <TelegramIcon />, title: "Messaging", arrow: false },
         { Icon: <NotificationsIcon />, title: "Notifications", arrow: false },
         {
-            Icon: <Avatar src={photoURL} />,
+            Icon: (
+                <Tooltip title="Sign-Out" arrow>
+                    <Avatar src={photoURL} />
+                </Tooltip>
+            ),
             title: "Me",
             arrow: true,
             onClick: () => auth.signOut(),
@@ -57,21 +63,21 @@ const Header = () => {
                         onClick={() => dispatch(ChangeTheme())}
                     />
                 </div>
-                    <Paper
-                        elevation={0}
-                        className={classes.header__bottom__nav}
-                        style={{ display: window.document.body.scrollHeight }}
-                    >
-                        <HomeIcon />
-                        <GroupIcon />
-                        <AddBoxIcon />
-                        {mode ? (
-                            <Brightness4Icon onClick={() => dispatch(ChangeTheme())} />
-                        ) : (
-                            <BrightnessHighIcon onClick={() => dispatch(ChangeTheme())} />
-                        )}
-                        <ExitToAppIcon onClick={() => auth.signOut()} />
-                    </Paper>
+                <Paper
+                    elevation={0}
+                    className={classes.header__bottom__nav}
+                    style={{ display: window.document.body.scrollHeight }}
+                >
+                    <HomeIcon />
+                    <GroupIcon />
+                    <AddBoxIcon />
+                    {mode ? (
+                        <Brightness4Icon onClick={() => dispatch(ChangeTheme())} />
+                    ) : (
+                        <BrightnessHighIcon onClick={() => dispatch(ChangeTheme())} />
+                    )}
+                    <ExitToAppIcon onClick={() => auth.signOut()} />
+                </Paper>
             </div>
         </Paper>
     );

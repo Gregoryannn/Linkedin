@@ -20,11 +20,9 @@ const Post = forwardRef(
         const [heartIcontOrder, setHeartIcontOrder] = useState(1);
         const [smileIconOrder, setSmileIconOrder] = useState(1);
         const [thumsUpIconOrder, setThumsUpIconOrder] = useState(1);
-
         const capitalize = (_string) => {
             return _string.charAt(0).toUpperCase() + _string.slice(1);
         };
-
         useEffect(() => {
             setLikesCount(Math.floor(Math.random() * 1000) + 1);
             setCommentsCount(Math.floor(Math.random() * 10) + 1);
@@ -67,7 +65,7 @@ const Post = forwardRef(
                     <div className={classes.header__info}>
                         <h4>{capitalize(username)}</h4>
                         <p>
-                            <ReactTimeago date={new Date(timestamp?.toDate()).toUTCString()} />
+                            <ReactTimeago date={new Date(timestamp?.toDate()).toUTCString()} units="minute" />
                         </p>
                     </div>
                     <MoreHorizOutlinedIcon />

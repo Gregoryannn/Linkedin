@@ -27,57 +27,53 @@ const Header = () => {
         { Icon: <WorkIcon />, title: "Jobs", arrow: false },
         { Icon: <TelegramIcon />, title: "Messaging", arrow: false },
         { Icon: <NotificationsIcon />, title: "Notifications", arrow: false },
-        { Icon: <Avatar src={photoURL} onClick={() => auth.signOut()} />, title: "me", arrow: true },
         {
-            Icon: <Avatar src={photoURL} onClick={() => auth.signOut()} />,
+            Icon: <Avatar src={photoURL} />,
             title: "Me",
             arrow: true,
+            onClick: () => auth.signOut(),
         },
         { Icon: <AppsIcon />, title: "Apps", arrow: true },
     ];
-
     return (
         <Paper elevation={0} className={classes.header}>
-            <div className={classes.header__logo}>
-                <img src={Logo} alt="logo" />
-                <div className={classes.search}>
-                    <SearchIcon />
-                    <input placeholder="Search" />
-                    <div className={classes.header__container}>
-                        <div className={classes.header__logo}>
-                            <img src={Logo} alt="logo" />
-                            <div className={classes.search}>
-                                <SearchIcon />
-                                <input placeholder="Search" />
-                            </div>
-                            <Avatar src={photoURL} />
-                        </div>
-                    
-                        <div className={classes.header__nav}>
-                            {items.map(({ Icon, title, arrow }, i) => (
-                                <MenuItem key={i} Icon={Icon} title={title} arrow={arrow} />
-                            ))}
-                            <MenuItem
-                                key={"mode"}
-                                Icon={mode ? <Brightness4Icon /> : <BrightnessHighIcon />}
-                                title={mode ? "Dark" : "Light"}
-                                onClick={() => dispatch(ChangeTheme())}
-                            />
-                        </div>
-                        <Paper elevation={0} className={classes.header__bottom__nav}>
-                            <HomeIcon />
-                            <GroupIcon />
-                            <AddBoxIcon />
-                            {mode ? (
-                                <Brightness4Icon onClick={() => dispatch(ChangeTheme())} />
-                            ) : (
-                                <BrightnessHighIcon onClick={() => dispatch(ChangeTheme())} />
-                            )}
-                            <ExitToAppIcon onClick={() => auth.signOut()} />
-                        </Paper>
+            <div className={classes.header__container}>
+                <div className={classes.header__logo}>
+                    <img src={Logo} alt="logo" />
+                    <div className={classes.search}>
+                        <SearchIcon />
+                        <input placeholder="Search" />
                     </div>
-                
-              
-                );
+                    <Avatar src={photoURL} />
+                </div>
+                <div className={classes.header__nav}>
+                    {items.map(({ Icon, title, arrow, onClick }, i) => (
+                        <MenuItem key={i} Icon={Icon} title={title} arrow={arrow} onClick={onClick} />
+                    ))}
+                    <MenuItem
+                        key={"mode"}
+                        Icon={mode ? <Brightness4Icon /> : <BrightnessHighIcon />}
+                        title={mode ? "Dark" : "Light"}
+                        onClick={() => dispatch(ChangeTheme())}
+                    />
+                </div>
+                    <Paper
+                        elevation={0}
+                        className={classes.header__bottom__nav}
+                        style={{ display: window.document.body.scrollHeight }}
+                    >
+                        <HomeIcon />
+                        <GroupIcon />
+                        <AddBoxIcon />
+                        {mode ? (
+                            <Brightness4Icon onClick={() => dispatch(ChangeTheme())} />
+                        ) : (
+                            <BrightnessHighIcon onClick={() => dispatch(ChangeTheme())} />
+                        )}
+                        <ExitToAppIcon onClick={() => auth.signOut()} />
+                    </Paper>
+            </div>
+        </Paper>
+    );
 };
-                export default Header;
+export default Header;

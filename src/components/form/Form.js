@@ -86,152 +86,167 @@ const Form = () => {
         }
         return fileName;
     };
-    const imageUploadHandler = async(e) => {
-        const inputFile = e.target.files[0];
-        const inputFileType = inputFile.type.split("/")[0];
-        const inputFileName = fileNameCompressor(inputFile.name, 20);
-        const fileSize = inputFile.size / (1024 * 1024);
-        switch (inputFileType) {
-            case "video":
-                if (fileSize > 25) return alert("Select a video less than 25MB size");
-                break;
-            case "image":
-                if (fileSize > 3) return alert("select an image less than 3MB size");
-                break;
-            default:
-                break;
-        }
-        let compressedInputFile = inputFile;
-        if (inputFileType === "image") {
-            //compression algorithm
-            const compressionOptions = {
-                maxSizeMB: 1,
-                maxWidthOrHeight: 1920,
-                useWebWorker: true,
-            };
-            try {
-                compressedInputFile = await imageCompression(inputFile, compressionOptions);
-            } catch (error) {
-                alert(error);
+
+        const imageUploadHandler = async (e, type) => {
+            const inputFile = e.target.files[0];
+            const _inputFile = inputFile.type.split("/");
+            const inputFileType = _inputFile[0];
+            const inputFileExec = _inputFile[1];
+            const inputFileName = fileNameCompressor(inputFile.name, 20);
+           const fileSize = inputFile.size / (1024 * 1024);
+            const acceptedImageFormats = ["png", "jpg", "jpeg", "gif"];
+            const acceptedVideoFormats = ["mp4", "mkv", "3gp", "av", "webm"];
+
+            switch (type) {
+                case "video":
+                    if (!acceptedVideoFormats.some((format) => format.includes(inputFileExec))) {
+                        alert(" Please select video format of mp4 , mkv , av ");
+                        e.target.value = "";
+                        return;
+                    }
+                    if (fileSize > 25) {
+                        alert("Select a video less than 25MB size");
+                        e.target.value = "";
+                        return;
+                    }
+                    break;
+                case "image":
+                    if (!acceptedImageFormats.some((format) => format.includes(inputFileExec))) {
+                        alert(" Please select image format of png , jpg , jpeg , gif ");
+                        e.target.value = "";
+                        return;
+                    }
+                    if (fileSize > 3) {
+                        alert("select an image less than 3MB size");
+                        e.target.value = "";
+                        return;
+                    }
+                    break;
+                default:
+                    alert("Invalid file format...");
+                    e.target.value = "";
+                    return;
             }
-        }
-        let inputFileDataBase64;
-        const file = new FileReader();
-        if (compressedInputFile) {
-            file.onloadend = (fileLoadedEvent) => {
-                inputFileDataBase64 = fileLoadedEvent.target.result;
-                setUploadData({
-                    ...uploadData,
-                    file: {
-                        type: inputFileType,
-                        name: inputFileName,
-                        data: inputFileDataBase64,
-                    },
-                });
-            };
-            file.readAsDataURL(compressedInputFile);
-        }
-        // clear the file input event value
-        e.target.value = "";
-    };
-    const resetState = () => {
-        setUploadData({
-            description: "",
-            file: {
-                type: "",
-                name: "",
-                data: "",
-            },
-        });
-        setProgress("");
-    };
-    return ( <
-        Paper className = { classes.upload } >
-        <
-        div className = { classes.upload__header } >
-        <
-        form className = { classes.header__form }
-        onSubmit = { handleSubmitButton } >
-        <
-        CreateIcon / >
-        <
-        input placeholder = "Start a post"
-        value = { uploadData.description }
-        onChange = {
-            (e) => setUploadData({...uploadData, description: e.target.value }) }
-        /> <
-        input id = "upload-image"
-        type = "file"
-        accept = "image/*,image/heif,image/heic,video/*,video/mp4,video/x-m4v,video/x-matroska,.mkv"
-        hidden onChange = { imageUploadHandler }
-        /> <
-        button type = "submit" > Post < /button> <
-        /form> <
-        /div> {
-            uploadData.file.name && !progress && ( <
-                div className = { classes.selectedFile } >
-                <
-                Chip color = "primary"
-                size = "small"
-                onDelete = { resetState }
-                icon = {
-                    uploadData.file.type === "image" ? ( <
-                        PhotoSizeSelectActualIcon / >
-                    ) : ( <
-                        VideocamRoundedIcon / >
-                    )
+
+            let compressedInputFile = inputFile;
+            if (inputFileType === "image") {
+                //compression algorithm
+                const compressionOptions = {
+                    maxSizeMB: 1,
+                    maxWidthOrHeight: 1920,
+                    useWebWorker: true,
+                };
+                try {
+                    compressedInputFile = await imageCompression(inputFile, compressionOptions);
+                } catch (error) {
+                    alert(error);
                 }
-                label = { uploadData.file.name }
-                /> <
-                /div>
-            )
-        } {
-            progress ? ( <
-                div className = { classes.uploading } >
-                <
-                LinearProgress variant = "determinate"
-                value = { progress }
-                className = { classes.progress }
-                /> <
-                p > { progress } % < /p> <
-                /div>
-            ) : (
-                ""
-            )
-        } <
-        div className = { classes.upload__media } >
-        <
-        label htmlFor = "upload-image"
-        className = { classes.media__options } >
-        <
-        PhotoSizeSelectActualIcon style = {
-            { color: theme.palette.type === "dark" ? LinkedInLightBlue : LinkedInBlue } }
-        /> <
-        h4 > Photo < /h4> <
-        /label> <
-        div className = { classes.media__options } >
-        <
-        YouTubeIcon style = {
-            { color: "orange" } }
-        /> <
-        h4 > Video < /h4> <
-        /div> <
-        div className = { classes.media__options } >
-        <
-        AssignmentTurnedInIcon style = {
-            { color: "#cea2cc" } }
-        /> <
-        h4 > Goal < /h4> <
-        /div> <
-        div className = { classes.media__options } >
-        <
-        CalendarViewDayIcon style = {
-            { color: "#f5987e" } }
-        /> <
-        h4 > Write article < /h4> <
-        /div> <
-        /div> <
-        /Paper>
-    );
+            }
+            let inputFileDataBase64;
+            const file = new FileReader();
+            if (compressedInputFile) {
+                file.onloadend = (fileLoadedEvent) => {
+                    inputFileDataBase64 = fileLoadedEvent.target.result;
+                    setUploadData({
+                        ...uploadData,
+                        file: {
+                            type: inputFileType,
+                            name: inputFileName,
+                            data: inputFileDataBase64,
+                        },
+                    });
+                };
+                file.readAsDataURL(compressedInputFile);
+            }
+            // clear the file input event value
+            e.target.value = "";
+        };
+        const resetState = () => {
+            setUploadData({
+                description: "",
+                file: {
+                    type: "",
+                    name: "",
+                    data: "",
+                },
+            });
+            setProgress("");
+        };
+        return (
+            <Paper className={classes.upload}>
+                <div className={classes.upload__header}>
+                    <form className={classes.header__form} onSubmit={handleSubmitButton}>
+                        <CreateIcon />
+                        <input
+                            placeholder="Start a post"
+                            value={uploadData.description}
+                            onChange={(e) => setUploadData({ ...uploadData, description: e.target.value })}
+                        />
+                        <input
+                            id="upload-image"
+                            type="file"
+                            //accept="image/*,image/heif,image/heic,video/*,video/mp4,video/x-m4v,video/x-matroska,.mkv"
+                            accept="image/*"
+                            hidden
+                            onChange={(e) => imageUploadHandler(e, "image")}
+                        />
+                        <input
+                            id="upload-video"
+                            type="file"
+                            //accept="image/*,image/heif,image/heic,video/*,video/mp4,video/x-m4v,video/x-matroska,.mkv"
+                            accept="video/*"
+                            hidden
+                            onChange={(e) => imageUploadHandler(e, "video")}
+                        />
+                        <button type="submit">Post</button>
+                    </form>
+                </div>
+                {uploadData.file.name && !progress && (
+                    <div className={classes.selectedFile}>
+                        <Chip
+                            color="primary"
+                            size="small"
+                            onDelete={resetState}
+                            icon={
+                                uploadData.file.type === "image" ? (
+                                    <PhotoSizeSelectActualIcon />
+                                ) : (
+                                    <VideocamRoundedIcon />
+                                )
+                            }
+                            label={uploadData.file.name}
+                        />
+                    </div>
+                )}
+                {progress ? (
+                    <div className={classes.uploading}>
+                        <LinearProgress variant="determinate" value={progress} className={classes.progress} />
+                        <p>{progress} %</p>
+                    </div>
+                ) : (
+                    ""
+                )}
+                <div className={classes.upload__media}>
+                    <label htmlFor="upload-image" className={classes.media__options}>
+                        <PhotoSizeSelectActualIcon
+                            style={{ color: theme.palette.type === "dark" ? LinkedInLightBlue : LinkedInBlue }}
+                        />
+                        <h4>Photo</h4>
+                    </label>
+                        <label htmlFor="upload-video" className={classes.media__options}>
+                            <YouTubeIcon style={{ color: "orange" }} />
+                            <h4>Video</h4>
+                </label>
+                <div className={classes.media__options}>
+                    <AssignmentTurnedInIcon style={{ color: "#cea2cc" }} />
+                    <h4>Goal</h4>
+                </div>
+                <div className={classes.media__options}>
+                    <CalendarViewDayIcon style={{ color: "#f5987e" }} />
+                    <h4>Write article</h4>
+                </div>
+            </div>
+    </Paper >
+  );
 };
 export default Form;

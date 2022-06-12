@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { darkSecondary } from "../../../assets/Colors";
-
 export default makeStyles((theme) => ({
     post: {
         width: "100%",
@@ -9,9 +8,10 @@ export default makeStyles((theme) => ({
         flexDirection: "column",
         alignItems: "center",
         marginTop: 10,
-        backgroundColor: theme.palette.type === "dark" && darkPrimary,
         [theme.breakpoints.down("xs")]: {
             borderRadius: 0,
+            border: 0,
+            boxShadow: "none",
         },
     },
     post__header: {
@@ -41,8 +41,8 @@ export default makeStyles((theme) => ({
         justifyContent: "center",
         marginLeft: 10,
         "& > h4": {
-            fontSize: 16,
-            fontWeight: 600,
+            fontSize: 15,
+            fontWeight: 500,
             marginBottom: 3,
         },
         "& > p": {
@@ -60,6 +60,9 @@ export default makeStyles((theme) => ({
         alignItems: "center",
         padding: 10,
         paddingTop: 5,
+        "& > p": {
+            fontSize: 14,
+        },
     },
     body__image: {
         width: "100%",
@@ -74,6 +77,9 @@ export default makeStyles((theme) => ({
             "&:hover": {
                 //transform: "scale(1.1)",
             },
+        },
+        "& > div": {
+            height: "auto",
         },
     },
     post__footer: {
@@ -107,10 +113,17 @@ export default makeStyles((theme) => ({
         justifyContent: "space-evenly",
         alignItems: "center",
         padding: 4,
+        [theme.breakpoints.down("xs")]: {
+            padding: 0,
+        },
     },
     action__icons: {
         flex: 1,
         display: "flex",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column",
+            padding: "5px 0",
+        },
         justifyContent: "center",
         alignItems: "center",
         marginRight: 2,

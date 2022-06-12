@@ -10,7 +10,6 @@ import CommentOutlinedIcon from "@material-ui/icons/CommentOutlined";
 import ReactPlayer from "react-player";
 import * as images from "../../../assets/images/images";
 import Style from "./Style";
-
 const Post = forwardRef(
     ({ profile, username, timestamp, description, fileType, fileData }, ref) => {
         const classes = Style();
@@ -19,7 +18,6 @@ const Post = forwardRef(
         const [heartIcontOrder, setHeartIcontOrder] = useState(1);
         const [smileIconOrder, setSmileIconOrder] = useState(1);
         const [thumsUpIconOrder, setThumsUpIconOrder] = useState(1);
-
         useEffect(() => {
             setLikesCount(Math.floor(Math.random() * 1000) + 1);
             setCommentsCount(Math.floor(Math.random() * 10) + 1);
@@ -27,114 +25,81 @@ const Post = forwardRef(
             setSmileIconOrder(Math.floor(Math.random() * (3 - 1 + 1)) + 1);
             setThumsUpIconOrder(Math.floor(Math.random() * (3 - 1 + 1)) + 1);
         }, []);
-
         const Reactions = () => {
-            return ( <
-                div className = { classes.footer__stats } >
-                <
-                div >
-                <
-                img src = { images.LinkedInLike }
-                alt = "linked-in-reaction-1"
-                style = {
-                    { order: `${heartIcontOrder} ` } }
-                /> <
-                img src = { images.LinkedInLove }
-                alt = "linked-in-reaction-2"
-                style = {
-                    { order: `${smileIconOrder} ` } }
-                /> <
-                img src = { images.LinkedInApplaud }
-                alt = "linked-in-reaction-3"
-                style = {
-                    { order: `${thumsUpIconOrder} ` } }
-                /> <
-                /div> <
-                h4 > { likesCount } < /h4> <
-                FiberManualRecordRoundedIcon style = {
-                    { fontSize: 8, color: "grey", paddingLeft: "3px" } }
-                /> <
-                h4 > { commentsCount }
-                comments < /h4> <
-                /div>
+            return (
+                <div className={classes.footer__stats}>
+                    <div>
+                        <img
+                            src={images.LinkedInLike}
+                            alt="linked-in-reaction-1"
+                            style={{ order: `${heartIcontOrder} ` }}
+                        />
+                        <img
+                            src={images.LinkedInLove}
+                            alt="linked-in-reaction-2"
+                            style={{ order: `${smileIconOrder} ` }}
+                        />
+                        <img
+                            src={images.LinkedInApplaud}
+                            alt="linked-in-reaction-3"
+                            style={{ order: `${thumsUpIconOrder} ` }}
+                        />
+                    </div>
+                    <h4>{likesCount}</h4>
+                    <FiberManualRecordRoundedIcon
+                        style={{ fontSize: 8, color: "grey", paddingLeft: "3px" }}
+                    />
+                    <h4>{commentsCount} comments</h4>
+                </div>
             );
         };
-
-        return ( <
-            Paper ref = { ref }
-            className = { classes.post } >
-            <
-            div className = { classes.post__header } >
-            <
-            Avatar src = { profile }
-            /> <
-            div className = { classes.header__info } >
-            <
-            h4 > { username } < /h4> <
-            p > { new Date(timestamp ? .toDate()).toUTCString() } < /p> <
-            /div> <
-            MoreHorizOutlinedIcon / >
-            <
-            /div> <
-            div className = { classes.post__body } >
-            <
-            div className = { classes.body__description } >
-            <
-            p > { description } < /p> <
-            /div> {
-                fileData && ( <
-                    div className = { classes.body__image } > {
-                        fileType === "image" ? ( <
-                            img src = { fileData }
-                            alt = "post" / >
-                        ) : ( <
-                            ReactPlayer url = { fileData }
-                            controls = { true }
-                            />
-                        )
-                    } <
-                    /div>
-                )
-            } <
-            /div> <
-            div className = { classes.post__footer } >
-            <
-            Reactions / >
-            <
-            div className = { classes.footer__actions } >
-            <
-            div className = { classes.action__icons } >
-            <
-            ThumbUpAltOutlinedIcon style = {
-                { transform: "scaleX(-1)" } }
-            /> <
-            h4 > Like < /h4> <
-            /div> <
-            div className = { classes.action__icons } >
-            <
-            CommentOutlinedIcon / >
-            <
-            h4 > Comment < /h4> <
-            /div> <
-            div className = { classes.action__icons } >
-            <
-            ReplyOutlinedIcon style = {
-                { transform: "scaleX(-1)" } }
-            /> <
-            h4 > Share < /h4> <
-            /div> <
-            div className = { classes.action__icons } >
-            <
-            SendIcon style = {
-                { transform: "rotate(-45deg)" } }
-            /> <
-            h4 > Send < /h4> <
-            /div> <
-            /div> <
-            /div> <
-            /Paper>
+        return (
+            <Paper ref={ref} className={classes.post}>
+                <div className={classes.post__header}>
+                    <Avatar src={profile} />
+                    <div className={classes.header__info}>
+                        <h4>{username}</h4>
+                        <p>{new Date(timestamp?.toDate()).toUTCString()}</p>
+                    </div>
+                    <MoreHorizOutlinedIcon />
+                </div>
+                <div className={classes.post__body}>
+                    <div className={classes.body__description}>
+                        <p>{description}</p>
+                    </div>
+                    {fileData && (
+                        <div className={classes.body__image}>
+                            {fileType === "image" ? (
+                                <img src={fileData} alt="post" />
+                            ) : (
+                <ReactPlayer url={fileData} controls={true} style={{ height: "auto !important" }} />
+                            )}
+                        </div>
+                    )}
+                </div>
+                <div className={classes.post__footer}>
+                    <Reactions />
+                    <div className={classes.footer__actions}>
+                        <div className={classes.action__icons}>
+                            <ThumbUpAltOutlinedIcon style={{ transform: "scaleX(-1)" }} />
+                            <h4>Like</h4>
+                        </div>
+                        <div className={classes.action__icons}>
+                            <CommentOutlinedIcon />
+                            <h4>Comment</h4>
+                        </div>
+                        <div className={classes.action__icons}>
+                            <ReplyOutlinedIcon style={{ transform: "scaleX(-1)" }} />
+                            <h4>Share</h4>
+                        </div>
+                        <div className={classes.action__icons}>
+                            <SendIcon style={{ transform: "rotate(-45deg)" }} />
+                            <h4>Send</h4>
+                        </div>
+                    </div>
+                </div>
+            </Paper>
         );
     }
 );
-
 export default Post;

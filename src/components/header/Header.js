@@ -17,80 +17,67 @@ import MenuItem from "./menuItem/MenuItem";
 import Style from "./Style";
 import { auth } from "../../firebase";
 const Header = () => {
-        const classes = Style();
-        const dispatch = useDispatch();
-        const mode = useSelector((state) => state.util);
-        const { photoURL } = useSelector((state) => state.user);
-        const items = [
-            { Icon: < HomeIcon / > , title: "Home", arrow: false },
-            { Icon: < GroupIcon / > , title: "My Network", arrow: false },
-            { Icon: < WorkIcon / > , title: "Jobs", arrow: false },
-            { Icon: < TelegramIcon / > , title: "Messaging", arrow: false },
-            { Icon: < NotificationsIcon / > , title: "Notifications", arrow: false },
-            {
-                Icon: < Avatar src = { photoURL }
-                onClick = {
-                    () => auth.signOut() }
-                />, title: "me", arrow: true }, { Icon: < AppsIcon / > , title: "Apps", arrow: true },
-            ];
-            return ( <
-                Paper elevation = { 0 }
-                className = { classes.header } >
-                <
-                div className = { classes.header__logo } >
-                <
-                img src = { Logo }
-                alt = "logo" / >
-                <
-                div className = { classes.search } >
-                <
-                SearchIcon / >
-                <
-                input placeholder = "Search" / >
-                <
-                /div> <
-                Avatar src = { photoURL }
-                /> <
-                /div> <
-                div className = { classes.header__nav } > {
-                    items.map(({ Icon, title, arrow }, i) => ( <
-                        MenuItem key = { i }
-                        Icon = { Icon }
-                        title = { title }
-                        arrow = { arrow }
-                        />
-                    ))
-                } <
-                MenuItem key = { "mode" }
-                Icon = { mode ? < Brightness4Icon / > : < BrightnessHighIcon / > }
-                title = { mode ? "Dark" : "Light" }
-                onClick = {
-                    () => dispatch(ChangeTheme()) }
-                /> <
-                /div> <
-                Paper elevation = { 0 }
-                className = { classes.header__bottom__nav } >
-                <
-                HomeIcon / >
-                <
-                GroupIcon / >
-                <
-                AddBoxIcon / > {
-                    mode ? ( <
-                        Brightness4Icon onClick = {
-                            () => dispatch(ChangeTheme()) }
-                        />
-                    ) : ( <
-                        BrightnessHighIcon onClick = {
-                            () => dispatch(ChangeTheme()) }
-                        />
-                    )
-                } <
-                ExitToAppIcon onClick = {
-                    () => auth.signOut() }
-                /> <
-                /Paper> <
-                /Paper>
-            );
-        };
-        export default Header;
+    const classes = Style();
+    const dispatch = useDispatch();
+    const mode = useSelector((state) => state.util);
+    const { photoURL } = useSelector((state) => state.user);
+    const items = [
+        { Icon: <HomeIcon />, title: "Home", arrow: false },
+        { Icon: <GroupIcon />, title: "My Network", arrow: false },
+        { Icon: <WorkIcon />, title: "Jobs", arrow: false },
+        { Icon: <TelegramIcon />, title: "Messaging", arrow: false },
+        { Icon: <NotificationsIcon />, title: "Notifications", arrow: false },
+        { Icon: <Avatar src={photoURL} onClick={() => auth.signOut()} />, title: "me", arrow: true },
+        {
+            Icon: <Avatar src={photoURL} onClick={() => auth.signOut()} />,
+            title: "Me",
+            arrow: true,
+        },
+        { Icon: <AppsIcon />, title: "Apps", arrow: true },
+    ];
+
+    return (
+        <Paper elevation={0} className={classes.header}>
+            <div className={classes.header__logo}>
+                <img src={Logo} alt="logo" />
+                <div className={classes.search}>
+                    <SearchIcon />
+                    <input placeholder="Search" />
+                    <div className={classes.header__container}>
+                        <div className={classes.header__logo}>
+                            <img src={Logo} alt="logo" />
+                            <div className={classes.search}>
+                                <SearchIcon />
+                                <input placeholder="Search" />
+                            </div>
+                            <Avatar src={photoURL} />
+                        </div>
+                    
+                        <div className={classes.header__nav}>
+                            {items.map(({ Icon, title, arrow }, i) => (
+                                <MenuItem key={i} Icon={Icon} title={title} arrow={arrow} />
+                            ))}
+                            <MenuItem
+                                key={"mode"}
+                                Icon={mode ? <Brightness4Icon /> : <BrightnessHighIcon />}
+                                title={mode ? "Dark" : "Light"}
+                                onClick={() => dispatch(ChangeTheme())}
+                            />
+                        </div>
+                        <Paper elevation={0} className={classes.header__bottom__nav}>
+                            <HomeIcon />
+                            <GroupIcon />
+                            <AddBoxIcon />
+                            {mode ? (
+                                <Brightness4Icon onClick={() => dispatch(ChangeTheme())} />
+                            ) : (
+                                <BrightnessHighIcon onClick={() => dispatch(ChangeTheme())} />
+                            )}
+                            <ExitToAppIcon onClick={() => auth.signOut()} />
+                        </Paper>
+                    </div>
+                
+              
+                );
+};
+                export default Header;

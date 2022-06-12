@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import LoginCard from "./loginCard/LoginCard";
 import Animation from "../../components/animations/Animation";
 import LottieRelaxing from "../../assets/images/relaxing.json";
-
 const Style = makeStyles((theme) => ({
     login: {
         width: "100vw",
@@ -33,12 +32,14 @@ const Style = makeStyles((theme) => ({
         [theme.breakpoints.down("sm")]: {
             padding: 0,
         },
+        [theme.breakpoints.down("xs")]: {
+            width: "90%",
+        },
     },
 }));
 
 const Login = () => {
     const classes = Style();
-
     return (
         <div className={classes.login}>
             <div className={classes.banner}>
@@ -50,5 +51,4 @@ const Login = () => {
         </div>
     );
 };
-
 export default Login;

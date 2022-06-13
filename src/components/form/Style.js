@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { darkSecondary, LinkedInBlue, LinkedInLightBlue } from "../../assets/Colors";
-
 export default makeStyles((theme) => ({
     upload: {
         width: "100%",
@@ -82,6 +81,42 @@ export default makeStyles((theme) => ({
             fontWeight: 600,
         },
     },
+
+    pasteURL_Input: {
+        width: "50%",
+        [theme.breakpoints.down("xs")]: {
+            width: "80%",
+        },
+        height: 30,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: "10px auto",
+        borderBottom:
+            theme.palette.type === "dark"
+                ? "1px dashed rgba(225,225,225,0.1)"
+                : "1px dashed rgba(0,0,0,0.15)",
+
+        "& > input": {
+            flex: 1,
+            height: "100%",
+            outlineWidth: 0,
+            backgroundColor: "transparent",
+            border: 0,
+            overflow: "hidden",
+            padding: "0px 10px",
+            color: theme.palette.type === "dark" ? "lightgrey" : "grey",
+            fontSize: 13,
+            "&::placeholder": {
+                color: theme.palette.type === "dark" && "grey",
+            },
+        },
+
+        "& > .MuiSvgIcon-root": {
+            margin: "2px 0px",
+        },
+    },
+
     progress: {
         flex: 1,
         height: 8,

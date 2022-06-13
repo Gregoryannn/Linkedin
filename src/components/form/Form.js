@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Chip, Paper, LinearProgress } from "@material-ui/core";
 import { useTheme } from "@material-ui/core";
@@ -14,6 +14,8 @@ import { v4 as uuid } from "uuid";
 import db, { storage } from "../../firebase";
 import { LinkedInBlue, LinkedInLightBlue } from "../../assets/Colors";
 import Styles from "./Style";
+import swal from "@sweetalert/with-react";
+
 const Form = () => {
     const classes = Styles();
     const theme = useTheme();
@@ -73,8 +75,10 @@ const Form = () => {
             uploadToFirebaseDB(uploadData.file.data);
         } else {
             alert("please enter something..");
+            swal("😕 Input field can not be empty");
         }
     };
+
     // if file name is too long.. compress it
     const fileNameCompressor = (str, limit) => {
         let fileName = str;
@@ -93,37 +97,35 @@ const Form = () => {
         const inputFileExec = _inputFile[1];
         const inputFileName = fileNameCompressor(inputFile.name, 20);
         const fileSize = inputFile.size / (1024 * 1024);
-
         const acceptedImageFormats = ["png", "jpg", "jpeg", "gif"];
         const acceptedVideoFormats = ["mp4", "mkv", "3gp", "avi", "webm"];
-
         switch (type) {
             case "video":
                 if (!acceptedVideoFormats.some((format) => format.includes(inputFileExec))) {
-                    alert(" Please select video format of mp4 , mkv , av ");
+                    swal("🔴 Please select video format of mp4 , mkv , av ");
                     e.target.value = "";
                     return;
                 }
                 if (fileSize > 25) {
-                    alert("Select a video less than 25MB size");
+                    swal("🔴 Please select a video less than 25MB file size");
                     e.target.value = "";
                     return;
                 }
                 break;
             case "image":
                 if (!acceptedImageFormats.some((format) => format.includes(inputFileExec))) {
-                    alert(" Please select image format of png , jpg , jpeg , gif ");
+                    swal("🔴 Please select image format of png , jpg , jpeg , gif ");
                     e.target.value = "";
                     return;
                 }
                 if (fileSize > 3) {
-                    alert("select an image less than 3MB size");
+                    swal("🔴 Please select an image less than 3MB file size");
                     e.target.value = "";
                     return;
                 }
                 break;
             default:
-                alert("Invalid file format...");
+                swal("😮 OOPS...!!! Invalid file format");
                 e.target.value = "";
                 return;
         }

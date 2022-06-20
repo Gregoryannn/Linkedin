@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import LoginCard from "./loginCard/LoginCard";
 import Animation from "../../components/animations/Animation";
 import LottieRelaxing from "../../assets/images/relaxing.json";
+
 const Style = makeStyles((theme) => ({
     login: {
         width: "100vw",
@@ -51,4 +52,5 @@ const Login = () => {
         </div>
     );
 };
+
 export default Login;

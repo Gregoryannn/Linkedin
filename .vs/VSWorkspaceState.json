@@ -1,16 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\src",
-    "\\src\\components",
-    "\\src\\components\\animations",
-    "\\src\\components\\form",
-    "\\src\\components\\header\\menuItem",
-    "\\src\\components\\login",
-    "\\src\\components\\login\\loginCard",
-    "\\src\\components\\posts",
-    "\\src\\components\\widgets"
+    ""
   ],
-  "SelectedNode": "\\src\\components\\login\\loginCard\\Style.js",
+  "SelectedNode": "\\C:\\Users\\asus\\Source\\Repos\\Linkedin",
   "PreviewInSolutionExplorer": false
 }

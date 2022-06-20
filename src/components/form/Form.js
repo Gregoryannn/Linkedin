@@ -17,11 +17,11 @@ import InsertLinkIcon from "@material-ui/icons/InsertLink";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { imageUploadHandler } from "./form.utils";
 
-
 const Form = () => {
     const classes = Styles();
     const theme = useTheme();
     const { displayName, photoURL } = useSelector((state) => state.user);
+
     const [uploadData, setUploadData] = useState({
         description: "",
         file: {
@@ -30,9 +30,11 @@ const Form = () => {
             data: "",
         },
     });
+
     const [progress, setProgress] = useState("");
     const [openURL, setOpenURL] = useState(false);
     const [URL, setURL] = useState("");
+
     const uploadToFirebaseDB = (fileData) => {
         // uploading to collection called posts
         db.collection("posts")
@@ -47,8 +49,10 @@ const Form = () => {
             })
             .then(() => resetState());
     };
+
     const handleSubmitButton = async (e) => {
         e.preventDefault();
+
         // verify atleast one of the input fields are not empyt
         if (uploadData.description || uploadData.file.data || URL) {
             // if file input is true...upload the file to Fire-Store
@@ -61,9 +65,11 @@ const Form = () => {
                         const value = Math.floor((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
                         setProgress(value);
                     },
+
                     (error) => {
                         alert(error);
                     },
+
                     () => {
                         storage
                             .ref("posts")
@@ -72,6 +78,7 @@ const Form = () => {
                             .then((url) => uploadToFirebaseDB(url));
                     }
                 );
+
                 // do not go further..
                 return;
             }
@@ -110,6 +117,7 @@ const Form = () => {
         setOpenURL(false);
         setURL("");
     };
+
     const toggleURL_Tab = () => {
         if (uploadData.file.data !== "") {
             setOpenURL(false);
@@ -119,6 +127,7 @@ const Form = () => {
             setOpenURL(true);
         }
     };
+
     const closeURL_Tab = () => {
         if (URL === "") {
             setOpenURL(false);
@@ -126,6 +135,7 @@ const Form = () => {
             setOpenURL(true);
         }
     };
+
     return (
         <Paper className={classes.upload}>
             <div className={classes.upload__header}>
@@ -200,6 +210,7 @@ const Form = () => {
                     )}
                 </div>
             )}
+
             <div className={classes.upload__media}>
                 <label
                     htmlFor={URL === "" ? "upload-image" : ""}
@@ -231,4 +242,3 @@ const Form = () => {
         </Paper>
     );
 };
-export default Form;

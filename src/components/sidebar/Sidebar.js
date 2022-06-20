@@ -5,6 +5,7 @@ import SidebarBottom from "./sidebarBottom/SidebarBottom";
 
 const Style = makeStyles((theme) => ({
     sidebar: {
+        height: "100%",
         display: "flex",
         flexDirection: "column",
     },
@@ -13,10 +14,10 @@ const Style = makeStyles((theme) => ({
 const Sidebar = () => {
     const classes = Style();
     return (
-       <div className={classes.sidebar}>
-      <SidebarTop />
-      <SidebarBottom />
-    </div>
+        <div className={classes.sidebar}>
+            <SidebarTop />
+            <SidebarBottom />
+        </div>
     );
 };
 

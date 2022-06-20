@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { darkSecondary, LinkedInBlue, LinkedInLightBlue } from "../../assets/Colors";
+
 export default makeStyles((theme) => ({
     upload: {
         width: "100%",
@@ -14,12 +15,14 @@ export default makeStyles((theme) => ({
             boxShadow: "none",
         },
     },
+
     upload__header: {
         height: "auto",
         display: "flex",
         alignItems: "center",
         padding: "15px 0 5px 0",
     },
+
     header__form: {
         flex: 1,
         height: 47,
@@ -66,11 +69,13 @@ export default makeStyles((theme) => ({
             },
         },
     },
+
     selectedFile: {
         display: "flex",
         alignItems: "center",
         paddingBottom: 5,
     },
+
     uploading: {
         display: "flex",
         alignItems: "center",
@@ -127,6 +132,7 @@ export default makeStyles((theme) => ({
             backgroundColor: theme.palette.type === "dark" ? LinkedInLightBlue : LinkedInBlue,
         },
     },
+
     upload__media: {
         height: 50,
         [theme.breakpoints.down("xs")]: {
@@ -137,6 +143,7 @@ export default makeStyles((theme) => ({
         padding: "2px 0",
         opacity: 0.8,
     },
+
     media__options: {
         flex: 1,
         height: "100%",

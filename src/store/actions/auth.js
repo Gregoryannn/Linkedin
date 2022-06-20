@@ -5,9 +5,9 @@ export const LoginAction = (user) => async (dispatch) => {
     });
 };
 
-    export const LogoutAction = () => async (dispatch) => {
-        dispatch({
-            type: "LOGOUT",
-            payload: {},
-        });
-    };
+export const LogoutAction = () => async (dispatch) => {
+    dispatch({
+        type: "LOGOUT",
+        payload: {},
+    });
+};

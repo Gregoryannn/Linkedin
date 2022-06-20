@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { darkSecondary } from "../../../assets/Colors";
+
 export default makeStyles((theme) => ({
     post: {
         width: "100%",

@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { ChangeTheme } from "../../store/actions/util";
 import Logo from "../../assets/images/logo.png";
-import { Paper, Avatar } from "@material-ui/core";
 import { Paper, Avatar, Tooltip } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import HomeIcon from "@material-ui/icons/Home";
@@ -22,7 +21,9 @@ const Header = () => {
     const classes = Style();
     const dispatch = useDispatch();
     const mode = useSelector((state) => state.util);
+
     const { photoURL } = useSelector((state) => state.user);
+
     const items = [
         { Icon: <HomeIcon />, title: "Home", arrow: false },
         { Icon: <GroupIcon />, title: "My Network", arrow: false },
@@ -41,6 +42,7 @@ const Header = () => {
         },
         { Icon: <AppsIcon />, title: "Apps", arrow: true },
     ];
+
     return (
         <Paper elevation={0} className={classes.header}>
             <div className={classes.header__container}>
@@ -59,15 +61,11 @@ const Header = () => {
                     <MenuItem
                         key={"mode"}
                         Icon={mode ? <Brightness4Icon /> : <BrightnessHighIcon />}
-                        title={mode ? "Dark" : "Light"}
+                        title={"Theme"}
                         onClick={() => dispatch(ChangeTheme())}
                     />
                 </div>
-                <Paper
-                    elevation={0}
-                    className={classes.header__bottom__nav}
-                    style={{ display: window.document.body.scrollHeight }}
-                >
+                <Paper className={classes.header__bottom__nav}>
                     <HomeIcon />
                     <GroupIcon />
                     <AddBoxIcon />
@@ -82,4 +80,5 @@ const Header = () => {
         </Paper>
     );
 };
+
 export default Header;

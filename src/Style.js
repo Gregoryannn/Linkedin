@@ -1,6 +1,8 @@
 import { makeStyles } from "@material-ui/core/styles";
+
 export default makeStyles((theme) => ({
     app: {},
+
     app__header: {
         position: "sticky",
         top: 0,
@@ -21,11 +23,13 @@ export default makeStyles((theme) => ({
             paddingBottom: 55,
         },
     },
+
     body__sidebar: {
         minWidth: 150,
         maxWidth: 220,
         height: "auto",
     },
+
     body__feed: {
         minWidth: 500,
         display: "flex",
@@ -38,14 +42,17 @@ export default makeStyles((theme) => ({
             padding: 0,
         },
     },
+
     feed__form: {
         width: "100%",
         height: "auto",
     },
+
     feed__posts: {
         width: "100%",
         height: "auto",
     },
+
     body__widgets: {
         minWidth: 225,
         maxWidth: 300,

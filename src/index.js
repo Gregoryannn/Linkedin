@@ -1,11 +1,12 @@
-import { compose, applyMiddleware, createStore } from "redux";
-import thunk from "redux-thunk";
-import combineReducers from "./reducers";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import store from "./store";
+import App from "./App";
+import "./style.css";
 
-// Enables Redux-Store chrome extention in browser
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-// Redux - Store
-const store = createStore(combineReducers, composeEnhancers(applyMiddleware(thunk)));
-
-export default store;
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById("root")
+);

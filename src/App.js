@@ -16,14 +16,19 @@ import { LinkedInBgColor, darkPrimary } from "./assets/Colors";
 
 const App = () => {
     const classes = Styles();
+
     const dispatch = useDispatch();
+
     const { displayName } = useSelector((state) => state.user);
+
     const mode = useSelector((state) => state.util);
+
     const muiTheme = createMuiTheme({
         palette: {
             type: mode ? "dark" : "light",
         },
     });
+
     useEffect(() => {
         auth.onAuthStateChanged((authUser) => {
             if (authUser) {
@@ -33,6 +38,7 @@ const App = () => {
             }
         });
     }, []);
+
     return (
         <ThemeProvider theme={muiTheme}>
             {!displayName ? (
@@ -82,4 +88,5 @@ const App = () => {
         </ThemeProvider>
     );
 };
+
 export default App;

@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+
 export default makeStyles((theme) => ({
     menuItem: {
         display: "flex",
@@ -8,11 +9,9 @@ export default makeStyles((theme) => ({
         cursor: "pointer",
         transition: "all 0.35s ease",
         "& > .MuiSvgIcon-root": {
-            
             fontSize: 24,
         },
         "& > .MuiAvatar-root": {
-          
             width: 24,
             height: 24,
         },

@@ -11,14 +11,17 @@ import ReactPlayer from "react-player";
 import ReactTimeago from "react-timeago";
 import * as images from "../../../assets/images/images";
 import Style from "./Style";
+
 const Post = forwardRef(
     ({ profile, username, timestamp, description, fileType, fileData }, ref) => {
         const classes = Style();
+
         const [likesCount, setLikesCount] = useState(1);
         const [commentsCount, setCommentsCount] = useState(1);
         const [heartIcontOrder, setHeartIcontOrder] = useState(1);
         const [smileIconOrder, setSmileIconOrder] = useState(1);
         const [thumsUpIconOrder, setThumsUpIconOrder] = useState(1);
+
         const capitalize = (_string) => {
             return _string.charAt(0).toUpperCase() + _string.slice(1);
         };
@@ -36,6 +39,7 @@ const Post = forwardRef(
             setSmileIconOrder(Math.floor(Math.random() * (3 - 1 + 1)) + 1);
             setThumsUpIconOrder(Math.floor(Math.random() * (3 - 1 + 1)) + 1);
         }, []);
+
         const Reactions = () => {
             return (
                 <div className={classes.footer__stats}>
@@ -64,6 +68,7 @@ const Post = forwardRef(
                 </div>
             );
         };
+
         return (
             <Paper ref={ref} className={classes.post}>
                 <div className={classes.post__header}>
@@ -83,8 +88,8 @@ const Post = forwardRef(
                     {fileData && (
                         <div className={classes.body__image}>
                             {fileType === "image" ? (
-                // <img src={fileData} alt="post" />
-                <PostImage ref={postImageRef} src={fileData} />
+                                // <img src={fileData} alt="post" />
+                                <PostImage ref={postImageRef} src={fileData} />
                             ) : (
                                 <ReactPlayer url={fileData} controls={true} style={{ height: "auto !important" }} />
                             )}
@@ -116,4 +121,5 @@ const Post = forwardRef(
         );
     }
 );
+
 export default Post;
